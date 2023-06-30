@@ -13,11 +13,12 @@ class AuthApi {
 
     final response = await _httpService.post('${_path}signup', signupForm);
 
+    
     if (response.statusCode == 201) {
       return AuthResponse.fromJson(jsonDecode(response.body));
     } else {
       throw HttpException(
-        jsonDecode(response.body).message ?? 'Something went wrong',
+        jsonDecode(response.body)['message']  ?? 'Something went wrong',
         response.statusCode,
       );
     }
@@ -27,27 +28,27 @@ class AuthApi {
     await _httpService.init();
 
     final response = await _httpService.post('${_path}signin', signinForm);
-
     if (response.statusCode == 201) {
       return AuthResponse.fromJson(jsonDecode(response.body));
     } else {
       throw HttpException(
-        jsonDecode(response.body).message ?? 'Something went wrong',
+        jsonDecode(response.body)['message'] ?? 'Something went wrong',
         response.statusCode,
       );
     }
   }
 
-  Future<Map<String, String>> checkUsername(String username) async {
+  Future<Map<String, dynamic>> checkUsername(String username) async {
     await _httpService.init();
 
     final response = await _httpService.get('${_path}checkUsername/$username');
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
+      
     } else {
       throw HttpException(
-        jsonDecode(response.body).message ?? 'Something went wrong',
+        jsonDecode(response.body)['message'] ?? 'Something went wrong',
         response.statusCode,
       );
     }

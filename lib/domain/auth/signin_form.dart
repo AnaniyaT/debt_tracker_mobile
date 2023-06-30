@@ -6,7 +6,7 @@ class SigninForm {
   SigninForm({
     required this.usernameOrEmail,
     required this.password,
-    this.remember
+    this.remember,
   });
 
   Map<String, dynamic> toJson() {

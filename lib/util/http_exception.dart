@@ -20,7 +20,7 @@ class UnauthorizedException extends HttpException {
 }
 
 class TimeOutException {
-  final String message = 'Connection timed out. Check your internet connection and try again.';
+  final String message = 'Connection timed out. ere oooooo Check your internet connection and try again.';
 
   TimeOutException();
 

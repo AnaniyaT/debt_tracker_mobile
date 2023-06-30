@@ -34,7 +34,6 @@ class AuthRepository extends AuthRepositoryInterface {
       final AuthResponse response = await _authApi.signin(signinForm.toJson());
       PreferenceService.setAuthToken(response.token);
       PreferenceService.setUser(response.user);
-
       return Right(response);
     } 
     
