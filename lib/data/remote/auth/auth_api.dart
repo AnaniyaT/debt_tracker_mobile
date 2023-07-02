@@ -13,11 +13,10 @@ class AuthApi {
 
     final response = await _httpService.post('${_path}signup', signupForm);
 
-    
     if (response.statusCode == 201) {
       return AuthResponse.fromJson(jsonDecode(response.body));
     } else {
-      throw HttpException(
+      throw DHttpException(
         jsonDecode(response.body)['message']  ?? 'Something went wrong',
         response.statusCode,
       );
@@ -31,7 +30,7 @@ class AuthApi {
     if (response.statusCode == 201) {
       return AuthResponse.fromJson(jsonDecode(response.body));
     } else {
-      throw HttpException(
+      throw DHttpException(
         jsonDecode(response.body)['message'] ?? 'Something went wrong',
         response.statusCode,
       );
@@ -47,7 +46,7 @@ class AuthApi {
       return jsonDecode(response.body);
       
     } else {
-      throw HttpException(
+      throw DHttpException(
         jsonDecode(response.body)['message'] ?? 'Something went wrong',
         response.statusCode,
       );

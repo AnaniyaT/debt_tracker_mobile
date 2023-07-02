@@ -7,7 +7,7 @@ class ChangePasswordForm {
     required this.newPassword,
   });
 
-  Map<String, dynamic> toJson() {
+  Map<String, String> toJson() {
     return {
       'oldPassword': oldPassword,
       'newPassword': newPassword,

@@ -9,5 +9,5 @@ abstract class UserRepositoryInterface {
   Future<Either<Failure, UserProfile>> getByUsername(String username);
   Future<Either<Failure, User>> changeProfile(ChangeProfileForm changeProfileForm);
   Future<Either<Failure, Unit>> changePassword(ChangePasswordForm changePasswordForm);
-  Future<Either<Failure, Unit>> delete();
+  Future<Either<Failure, Unit>> deleteAccount();
 }

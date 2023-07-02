@@ -2,7 +2,7 @@ import 'package:debt_tracker_mobile/common/failure.dart';
 import 'package:debt_tracker_mobile/util/http_exception.dart';
 
 class EHandle {
-  static Failure handleException(HttpException e) {
+  static Failure handleException(DHttpException e) {
     if (e.statusCode == 401) {
       return NotAuthenticatedFailure(e.message);
     } 

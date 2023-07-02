@@ -1,8 +1,8 @@
-class HttpException{
+class DHttpException{
   final String message;
   final int statusCode;
 
-  HttpException(this.message, this.statusCode);
+  DHttpException(this.message, this.statusCode);
 
   @override
   String toString() {
@@ -10,7 +10,7 @@ class HttpException{
   }
 }
 
-class UnauthorizedException extends HttpException {
+class UnauthorizedException extends DHttpException {
   UnauthorizedException() : super('Unauthorized. Please login again.', 401);
 
   @override

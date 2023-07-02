@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+
+class OverviewCard extends StatelessWidget {
+  final String title;
+  final double amount;
+  final int people;
+  const OverviewCard(this.title, this.amount, this.people, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '$title',
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black54),
+        ),
+        SizedBox(
+          height: 4,
+        ),
+        Container(
+          decoration: BoxDecoration(
+              color: Colors.black87,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: const Offset(0, 2), // changes position of shadow
+                )
+              ]),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$amount Birr',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.person_outline_rounded,
+                      size: 15,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '$people People',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

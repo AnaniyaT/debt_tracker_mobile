@@ -3,6 +3,8 @@ import 'package:debt_tracker_mobile/common/failure.dart';
 import 'debt.dart';
 
 abstract class DebtRepositoryInterface {
+  Future<Either<Failure, List<Debt>>> getAll();
+  Future<Either<Failure, Debt>> getById(String id);
   Future<Either<Failure, Debt>> request(RequestDebtForm requestDebtForm);
   Future<Either<Failure, Unit>> approve(String id);
   Future<Either<Failure, Unit>> decline(String id);

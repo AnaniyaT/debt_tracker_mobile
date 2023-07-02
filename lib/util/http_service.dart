@@ -31,8 +31,8 @@ class HttpService {
     return await http.put(Uri.parse(Constants.baseUrl + path), headers: _headers, body: jsonEncode(body));
   }
 
-  Future<http.Response> patch(String path, Map<String, dynamic> body) async {
-    return await http.patch(Uri.parse(Constants.baseUrl + path), headers: _headers, body: body?? {});
+  Future<http.Response> patch(String path, {Map<String, dynamic>? body = const {}}) async {
+    return await http.patch(Uri.parse(Constants.baseUrl + path), headers: _headers, body: body);
   }
 
   Future<http.Response> delete(String path) async {

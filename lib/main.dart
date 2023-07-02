@@ -1,4 +1,5 @@
 import 'package:debt_tracker_mobile/presentation/auth/authPage.dart';
+import 'package:debt_tracker_mobile/presentation/core/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,9 +30,6 @@ class MainApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             )),
-        home: BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const AuthPage(),
-        ));
+        home: HomePage());
   }
 }

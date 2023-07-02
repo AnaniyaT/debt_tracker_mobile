@@ -19,7 +19,7 @@ class AuthRepository extends AuthRepositoryInterface {
       return Right(response);
     } 
     
-    on HttpException catch (e) {
+    on DHttpException catch (e) {
       return Left(EHandle.handleException(e));
     } 
     
@@ -37,7 +37,7 @@ class AuthRepository extends AuthRepositoryInterface {
       return Right(response);
     } 
     
-    on HttpException catch (e) {
+    on DHttpException catch (e) {
       return Left(EHandle.handleException(e));
     } 
     
@@ -53,7 +53,7 @@ class AuthRepository extends AuthRepositoryInterface {
       return const Right(unit);
     } 
     
-    on HttpException catch (e) {
+    on DHttpException catch (e) {
       return Left(EHandle.handleException(e));
     } 
     
