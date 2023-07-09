@@ -1,5 +1,8 @@
 import 'package:animations/animations.dart';
+import 'package:debt_tracker_mobile/application/user/profile/profile_bloc.dart';
+import 'package:debt_tracker_mobile/presentation/debt/request_debt.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -14,9 +17,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 10, 25, 20),
+        padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -44,7 +53,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
             OpenContainer(
               transitionType: ContainerTransitionType.fade,
-              transitionDuration: Duration(milliseconds: 400),
               closedColor: Colors.black87,
               closedShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
@@ -59,9 +67,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 ),
               ),
               openBuilder: (context, action) {
-                return Container(
-                  child: Center(child: Text('Add')),
-                );
+                return BlocProvider<ProfileBloc>(
+                  create: (context) => ProfileBloc(),
+                  child: RequestDebtPage())
+                  ;
               },
             ),
             Container(

@@ -63,6 +63,21 @@ class UserApi {
     }
   }
 
+  Future<List<UserProfile>> searchUsername(String username) async {
+    await _httpService.init();
+
+    final response = await _httpService.get('${_path}search/$username');
+
+    if (response.statusCode == 200) {
+      return (jsonDecode(response.body) as List)
+        .map((profile) => UserProfile.fromJson(profile)).toList() ;
+    } else {
+      throw DHttpException(
+          jsonDecode(response.body)['message'] ?? 'Something went wrong',
+          response.statusCode);
+    }
+  }
+
   Future<User> changeProfile(
       Map<String, String> changeProfileForm) async {
     await _httpService.init();

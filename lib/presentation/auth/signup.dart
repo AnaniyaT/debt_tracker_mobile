@@ -5,6 +5,7 @@ import 'package:debt_tracker_mobile/domain/user/user.dart';
 import 'package:debt_tracker_mobile/presentation/auth/authInputField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key, this.changePage});
@@ -35,8 +36,7 @@ class _SignupPageState extends State<SignupPage> {
         child: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
-              doSth();
-              
+              GoRouter.of(context).go('/home');
             } else if (state is AuthFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

@@ -23,5 +23,13 @@ class GetProfileByUsername extends ProfileEvent {
   List<Object> get props => [username];
 }
 
+class SearchUsername extends ProfileEvent {
+  final String username;
+  const SearchUsername(this.username);
+
+  @override
+  List<Object> get props => [username];
+}
+
 class GetAllProfiles extends ProfileEvent {}
 

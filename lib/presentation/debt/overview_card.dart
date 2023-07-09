@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletons/skeletons.dart';
 
 class OverviewCard extends StatelessWidget {
   final String title;
@@ -57,6 +58,7 @@ class OverviewCard extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
+                      people == 1 ? '$people Person' :
                       '$people People',
                       style: TextStyle(color: Colors.white),
                     ),
@@ -66,6 +68,59 @@ class OverviewCard extends StatelessWidget {
             ),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class OverviewCardSkeleton extends StatelessWidget {
+  const OverviewCardSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SkeletonAvatar(
+          style: SkeletonAvatarStyle(
+            width: 70,
+            height: 20,
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(22),
+          decoration: BoxDecoration(
+            color: Colors.grey[700],
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SkeletonAvatar(
+                style: SkeletonAvatarStyle(
+                  width: 100,
+                  height: 30,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              SkeletonAvatar(
+                style: SkeletonAvatarStyle(
+                  width: 80,
+                  height: 15,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }

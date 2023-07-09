@@ -47,5 +47,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         (r) => emit(ProfileSuccess(r)),
       );
     });
+
+    on<SearchUsername> ((event, emit) async {
+      emit(ProfileLoading());
+
+      Either<Failure, List<UserProfile>> result =
+          await _userRepository.search(event.username);
+
+      result.fold(
+        (l) => emit(ProfileFailure(l)),
+        (r) => emit(ProfileSuccessMultiple(r)),
+      );
+    });
   }
 }

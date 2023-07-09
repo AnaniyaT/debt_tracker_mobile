@@ -28,5 +28,5 @@ class NotAuthorizedFailure extends Failure {
 }
 
 class ConnectionFailure extends Failure {
-  ConnectionFailure() : super("Connection timed out. Check your internet connection and try again.");
+  ConnectionFailure() : super("Something Went Wrong");
 }

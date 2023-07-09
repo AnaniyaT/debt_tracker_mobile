@@ -65,6 +65,20 @@ class UserRepository extends UserRepositoryInterface {
   }
 
   @override
+  Future<Either<Failure, List<UserProfile>>> search(String query) async {
+    try {
+      List<UserProfile> profiles = await _userApi.searchUsername(query);
+      return right(profiles);
+    }
+    on DHttpException catch(e) {
+      return left(EHandle.handleException(e));
+    }
+    catch (e) {
+      return left(ConnectionFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, User>> changeProfile(ChangeProfileForm changeProfileForm) async {
     try {
       User user = await _userApi.changeProfile(changeProfileForm.toJson());

@@ -34,5 +34,74 @@ class DebtBloc extends Bloc<DebtEvent, DebtState> {
       );
     });
 
+    on<RequestDebt> (
+      (event, emit) async {
+        emit(DebtLoading());
+
+        final result = await _debtRepository.request(event.requestDebtForm);
+
+        result.fold(
+          (l) => emit(DebtFailure(l)),
+          (r) => emit(DebtSuccess(r)),
+        );
+      });
+
+    on<ApproveDebt>((event, emit) async {
+      emit(DebtLoading());
+
+      final result = await _debtRepository.approve(event.id);
+
+      result.fold(
+        (l) => emit(DebtFailure(l)),
+        (r) => emit(DebtEditSuccess('Debt approved')),
+      );
+    });
+
+    on<DeclineDebt>((event, emit) async {
+      emit(DebtLoading());
+
+      final result = await _debtRepository.decline(event.id);
+
+      result.fold(
+        (l) => emit(DebtFailure(l)),
+        (r) => emit(DebtEditSuccess('Debt declined')),
+      );
+    });
+
+    on<ConfirmDebt>((event, emit) async {
+      emit(DebtLoading());
+
+      final result = await _debtRepository.confirm(event.id);
+
+      result.fold(
+        (l) => emit(DebtFailure(l)),
+        (r) => emit(DebtEditSuccess('Payment confirmed')),
+      );
+    });
+
+    on<DeleteRequest>((event, emit) async {
+      emit(DebtLoading());
+
+      final result = await _debtRepository.deleteRequest(event.id);
+
+      result.fold(
+        (l) => emit(DebtFailure(l)),
+        (r) => emit(DebtEditSuccess('Debt request deleted')),
+      );
+    });
+
+    on<DeleteApproved>((event, emit) async {
+      emit(DebtLoading());
+
+      final result = await _debtRepository.deleteApproved(event.id);
+
+      result.fold(
+        (l) => emit(DebtFailure(l)),
+        (r) => emit(DebtEditSuccess('Debt deleted')),
+      );
+    });
+
+    
+
   }
 }

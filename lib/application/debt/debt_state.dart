@@ -27,6 +27,14 @@ class DebtSuccessMultiple extends DebtState {
   List<Object> get props => [debts];
 }
 
+class DebtEditSuccess extends DebtState {
+  final String message;
+  const DebtEditSuccess(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
 class DebtFailure extends DebtState {
   final Failure failure;
   const DebtFailure(this.failure);

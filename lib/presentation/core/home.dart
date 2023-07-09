@@ -13,11 +13,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-        child: DebtHome(),
-      ),
+      extendBody: true,
+      body: DebtHome(),
       bottomNavigationBar: BottomNavBar(),
     );
   }

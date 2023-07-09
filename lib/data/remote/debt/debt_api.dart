@@ -55,7 +55,7 @@ class DebtApi {
   Future<Map<String, dynamic>> patchDebt(String path, String id) async {
     await _httpService.init();
     
-    final response = await _httpService.patch('$_path$path/$id');
+    final response = await _httpService.patch('$_path$path$id');
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
@@ -70,7 +70,7 @@ class DebtApi {
   Future<Map<String, dynamic>> deleteDebt(String path, String id) async {
     await _httpService.init();
     
-    final response = await _httpService.delete('$_path$path/$id');
+    final response = await _httpService.delete('$_path$path$id');
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);

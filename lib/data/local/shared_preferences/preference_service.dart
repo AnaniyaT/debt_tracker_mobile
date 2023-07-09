@@ -25,6 +25,17 @@ class PreferenceService {
 
   static Future<User> getUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // return User(
+    //   id: '1234',
+    //   name: 'John Doe',
+    //   email: 'email@email.com',
+    //   username: 'johndoe',
+    //   amountOwed: 49,
+    //   amountOwing: 0,
+    //   profilePicture: 'https://picsum.photos/200/300',
+    //   debts: [],
+    //   history: []
+    // );
     return User.fromJson(jsonDecode(prefs.getString('user') ?? '{}'));
   }
 

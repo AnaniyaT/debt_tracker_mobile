@@ -19,6 +19,7 @@ class DebtRepository extends DebtRepositoryInterface {
     }
 
     catch (e) {
+      print(e.toString());
       return Left(ConnectionFailure());
     }
   }
