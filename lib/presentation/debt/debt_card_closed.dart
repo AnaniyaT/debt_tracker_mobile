@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DebtCardClosed extends StatefulWidget {
   final Debt debt;
-  const DebtCardClosed(this.debt, {super.key});
+  final double width;
+  const DebtCardClosed(this.debt, this.width, {super.key});
 
   @override
   State<DebtCardClosed> createState() => _DebtCardClosedState();
@@ -58,7 +59,7 @@ class _DebtCardClosedState extends State<DebtCardClosed> {
   @override
   build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width  - 40,
+      width: widget.width,
       child: Padding(
         padding: EdgeInsets.all(25),
         child: Column(

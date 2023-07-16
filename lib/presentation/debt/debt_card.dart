@@ -9,7 +9,8 @@ import 'package:skeletons/skeletons.dart';
 
 class DebtCard extends StatelessWidget {
   final Debt debt;
-  const DebtCard(this.debt, {super.key});
+  final bool home;
+  const DebtCard(this.debt, {this.home=false,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class DebtCard extends StatelessWidget {
       ),
       closedBuilder: (context, action) => BlocProvider(
         create: (context) => ProfileBloc(),
-        child: DebtCardClosed(debt),
+        child: DebtCardClosed(debt, MediaQuery.of(context).size.width - (home? 60 : 40)),
       ),
       openBuilder: (context, action) => DebtDetails(debt),
     );
@@ -31,14 +32,15 @@ class DebtCard extends StatelessWidget {
 }
 
 class DebtCardSkeleton extends StatelessWidget {
-  const DebtCardSkeleton({super.key});
+  final bool home;
+  const DebtCardSkeleton({this.home=false, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container (
       padding: EdgeInsets.all(20),
       height: 210,
-      width: MediaQuery.of(context).size.width - 40,
+      width: MediaQuery.of(context).size.width - (home ? 60 : 40),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.grey[700]

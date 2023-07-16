@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar(this.callback, {super.key});
+  final callback;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -39,6 +40,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 child: IconButton(
                   enableFeedback: false,
                   onPressed: () {
+                    widget.callback(0);
                     setState(() {
                       _pageInd = 0;
                     });
@@ -83,6 +85,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 child: IconButton(
                   enableFeedback: false,
                   onPressed: () {
+                    widget.callback(1);
                     setState(() {
                       _pageInd = 1;
                     });

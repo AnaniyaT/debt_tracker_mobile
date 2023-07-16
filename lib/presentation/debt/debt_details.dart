@@ -136,7 +136,7 @@ class DebtDetails extends StatelessWidget {
                               // Center(
                               //   child: Text("No description provided.")
                               // )
-                              Text(debt.description ?? 'No description provided')
+                              Text(debt.description!.isEmpty ? 'No description provided :(' : debt.description!)
                             ],
                           )),
                       SizedBox(

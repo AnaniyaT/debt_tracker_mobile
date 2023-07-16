@@ -48,4 +48,9 @@ class PreferenceService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('user');
   }
+
+  static Future<void> logout() async {
+    await removeAuthToken();
+    await removeUser();
+  }
 }

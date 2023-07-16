@@ -131,7 +131,7 @@ class _DebtHomeState extends State<DebtHome> {
                       );
                       PreferenceService.removeAuthToken();
                       GoRouter.of(context).go('/');
-                    }
+                    } else 
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(state.failure.message),
@@ -211,27 +211,34 @@ class _DebtHomeState extends State<DebtHome> {
                           ],
                         ),
                       ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 20, top: 20),
-                          child: Row(
-                            children: [
-                              for (var debt
-                                  in debts.sublist(0, min(4, debts.length)))
-                                Row(
-                                  children: [
-                                    (state is DebtSuccessMultiple)
-                                        ? DebtCard(
-                                            debt,
-                                          )
-                                        : DebtCardSkeleton(),
-                                    SizedBox(
-                                      width: 20,
-                                    )
-                                  ],
-                                )
-                            ],
+                
+                      ScrollConfiguration(
+                        behavior: ScrollBehavior(),
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(decelerationRate: ScrollDecelerationRate.normal),
+                          clipBehavior: Clip.antiAlias,
+                          scrollDirection: Axis.horizontal,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 20, top: 30),
+                            child: Row(
+                              children: [
+                                for (var debt
+                                    in debts.sublist(0, min(4, debts.length)))
+                                  Row(
+                                    children: [
+                                      (state is DebtSuccessMultiple)
+                                          ? DebtCard(
+                                              debt,
+                                              home: true,
+                                            )
+                                          : DebtCardSkeleton(home: true,),
+                                      SizedBox(
+                                        width: 20,
+                                      )
+                                    ],
+                                  )
+                              ],
+                            ),
                           ),
                         ),
                       ),

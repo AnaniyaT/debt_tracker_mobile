@@ -1,6 +1,7 @@
 import 'package:debt_tracker_mobile/application/debt/debt_bloc.dart';
 import 'package:debt_tracker_mobile/presentation/auth/authPage.dart';
 import 'package:debt_tracker_mobile/presentation/core/home.dart';
+import 'package:debt_tracker_mobile/presentation/core/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -79,10 +80,14 @@ class MainApp extends StatelessWidget {
 final router = GoRouter(routes: [
   GoRoute(
     path: '/',
+    builder: (context, state) => IntroPage(),
+  ),
+  GoRoute(
+    path: '/auth',
     builder: (context, state) => BlocProvider(
       create: (context) => AuthBloc(),
-      child: AuthPage(),
-    ),
+      child: AuthPage()
+    )
   ),
   GoRoute(
     path: '/home',

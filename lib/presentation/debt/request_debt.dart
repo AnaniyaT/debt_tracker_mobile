@@ -66,187 +66,195 @@ class _RequestDebtPageState extends State<RequestDebtPage> {
               ],
             ),
             SizedBox(
-              height: 30,
+              height: 20,
             ),
             Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Stack(children: [
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Lender",
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            (lender != null)
-                                ? ProfileChip((lender) as UserProfile, () {
-                                    setState(() {
-                                      lender = null;
-                                    });
-                                  })
-                                : Container(),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 2),
-                              decoration: BoxDecoration(
-                                  color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    prefixIcon: Icon(Icons.search),
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    hintText: 'Username'),
-                                onChanged: (value) {
-                                  username = value;
-                                  if (username.length > 0) {
-                                    BlocProvider.of<ProfileBloc>(context)
-                                        .add(SearchUsername(username));
-                                    setState(() {
-                                      showSuggestions = true;
-                                    });
-                                  }
-                                },
+              flex: 2,
+              child: SizedBox(
+            
+                child: SingleChildScrollView(
+                  child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Stack(children: [
+                        Column(
+                            
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Lender",
+                                  style: TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.bold)),
+                              
+                              (lender != null)
+                                  ? ProfileChip((lender) as UserProfile, () {
+                                      setState(() {
+                                        lender = null;
+                                      });
+                                    })
+                                  : Container(),
+                              SizedBox(
+                                height: 10,
                               ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text('Amount',
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 2),
-                              decoration: BoxDecoration(
-                                  color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                    prefixIcon: Icon(Icons.money),
-                                    hintText: 'Amount',
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none),
-                                onChanged: (value) {
-                                  if (value.length > 0) {
-                                    amount = int.tryParse(value) ?? 0;
-                                  }
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text('Description',
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 2),
-                              decoration: BoxDecoration(
-                                  color: Colors.black12,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: TextFormField(
-                                maxLines: 7,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none),
-                                onChanged: (value) {
-                                  description = value;
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            BlocConsumer<DebtBloc, DebtState>(
-                              listener: (context,state) {
-                                if (state is DebtSuccess) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Debt Requested'))
-                                  );
-    
-                                  BlocProvider.of<DebtBloc>(context).add(GetDebts());
-                                }
-                              },
-                              builder: (context, state) {
-                                return Container(
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    if (lender != null) {
-                                      BlocProvider.of<DebtBloc>(context).add(
-                                      RequestDebt(
-                                        RequestDebtForm(
-                                          lenderId: lender!.id,
-                                          amount: amount,
-                                          description: description,
-                                        )
-                                      )
-                                    );
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 2),
+                                decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      prefixIcon: Icon(Icons.search),
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      hintText: 'Username'),
+                                  onChanged: (value) {
+                                    username = value;
+                                    if (username.length > 0) {
+                                      BlocProvider.of<ProfileBloc>(context)
+                                          .add(SearchUsername(username));
+                                      setState(() {
+                                        showSuggestions = true;
+                                      });
                                     }
                                   },
-                                  child: (state is DebtLoading) ? SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: CircularProgressIndicator(
-                                      backgroundColor: Colors.white,
-                                      strokeWidth: 1,
-                                    ),
-                                  ) : Text('Request'),
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black87,
-                                      padding: EdgeInsets.symmetric(vertical: 15),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10))),
                                 ),
-                              );
-                              }  
-                            )
-                          ]),
-                      BlocBuilder<ProfileBloc, ProfileState>(
-                          builder: (context, state) {
-                        if (state is ProfileSuccessMultiple && showSuggestions && username.length > 0) {
-                          return Positioned(
-                              top: 100,
-                              child: SingleChildScrollView(
-                                child: ConstrainedBox(
-                                  constraints: BoxConstraints(maxHeight: 300),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width - 40,
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.white),
-                                    child: FutureBuilder(
-                                        future: PreferenceService.getUser(),
-                                        builder: ((context, snapshot) {
-                                          if (snapshot.hasData) {
-                                            String me = snapshot.data!.id;
-    
-                                            return ListView.separated(
-                                              shrinkWrap: true,
-                                              itemCount: state.profiles.length,
-                                              itemBuilder: (context, index) {
-                                                UserProfile profile =
-                                                    state.profiles[index];
-                                                if (profile.id != me)
-                                                  return Expanded(
-                                                    child: GestureDetector(
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text('Amount',
+                                  style: TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.bold)),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 2),
+                                decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                      prefixIcon: Icon(Icons.money),
+                                      hintText: 'Amount',
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none),
+                                  onChanged: (value) {
+                                    if (value.length > 0) {
+                                      amount = int.tryParse(value) ?? 0;
+                                    }
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text('Description',
+                                  style: TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.bold)),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 2),
+                                decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: TextFormField(
+                                  maxLines: 7,
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none),
+                                  onChanged: (value) {
+                                    description = value;
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 60,
+                              ),
+                              BlocConsumer<DebtBloc, DebtState>(
+                                listener: (context,state) {
+                                  if (state is DebtSuccess) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Debt Requested'))
+                                    );
+                    
+                                    BlocProvider.of<DebtBloc>(context).add(GetDebts());
+                                  }
+                                },
+                                builder: (context, state) {
+                                  return Container(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      if (lender != null) {
+                                        BlocProvider.of<DebtBloc>(context).add(
+                                        RequestDebt(
+                                          RequestDebtForm(
+                                            lenderId: lender!.id,
+                                            amount: amount,
+                                            description: description,
+                                          )
+                                        )
+                                      );
+                                      }
+                                    },
+                                    child: (state is DebtLoading) ? SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.white,
+                                        strokeWidth: 1,
+                                      ),
+                                    ) : Text('Request'),
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.black87,
+                                        padding: EdgeInsets.symmetric(vertical: 15),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10))),
+                                  ),
+                                );
+                                }  
+                              )
+                            ]),
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                            builder: (context, state) {
+                          if (state is ProfileSuccessMultiple && showSuggestions && username.length > 0) {
+                            return Positioned(
+                                top: lender == null ? 100 : 180,
+                                child: SingleChildScrollView(
+                                  child: ConstrainedBox(
+                                    constraints: BoxConstraints(maxHeight: 300),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width - 40,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                blurRadius: 10,
+                                                offset: Offset(0, 5))
+                                          ]
+                                          ),
+                                      child: FutureBuilder(
+                                          future: PreferenceService.getUser(),
+                                          builder: ((context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              String me = snapshot.data!.id;
+                    
+                                              return ListView.separated(
+                                                shrinkWrap: true,
+                                                itemCount: state.profiles.length,
+                                                itemBuilder: (context, index) {
+                                                  UserProfile profile =
+                                                      state.profiles[index];
+                                                  if (profile.id != me)
+                                                    return GestureDetector(
                                                       onTap: () {
                                                         setState(() {
                                                           lender = profile;
@@ -267,6 +275,7 @@ class _RequestDebtPageState extends State<RequestDebtPage> {
                                                             ),
                                                             SizedBox(width: 20),
                                                             Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: [
                                                                 Text(
                                                                   profile.name,
@@ -285,29 +294,29 @@ class _RequestDebtPageState extends State<RequestDebtPage> {
                                                           ],
                                                         ),
                                                       ),
-                                                    ),
-                                                  );
-                                                return Container();
-                                              },
-                                              separatorBuilder: (context, index) {
-                                                if (state.profiles[index].id !=
-                                                    me) {
-                                                  return Divider();
-                                                }
-                                                return Container();
-                                              },
-                                            );
-                                          }
-                                          return Container();
-                                        })),
+                                                    );
+                                                  return Container();
+                                                },
+                                                separatorBuilder: (context, index) {
+                                                  if (state.profiles[index].id !=
+                                                      me) {
+                                                    return Divider();
+                                                  }
+                                                  return Container();
+                                                },
+                                              );
+                                            }
+                                            return Container();
+                                          })),
+                                    ),
                                   ),
-                                ),
-                              ));
-                        } else {
-                          return Container();
-                        }
-                      })
-                    ])),
+                                ));
+                          } else {
+                            return Container();
+                          }
+                        })
+                      ])),
+                ),
               ),
             )
           ],
